@@ -7,33 +7,30 @@ import glob
 def main():
     image_list = []
 
+    #Reading images---------------
     for filename in sorted(glob.glob('train_images/*')):
+
         print filename
+
         im = cv2.imread(filename)
         im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
-         # percent of original size
+        #Resize images---------------
         width = im.shape[1]
         height = int(300.0/width * im.shape[0])
-        print height
         im = cv2.resize(im, (300,height), interpolation = cv2.INTER_AREA)
-        # h = 300
-        # w = 300
-        # y = im.shape[0]/2 - h/2
-        # x = im.shape[1]/2 - w/2
-        # im = im[y:y+h, x:x+w]
-        # plt.imshow(im)
-        # plt.show()
         image_list.append(im)
 
 
     img = image_list[1]
-
     img2 = image_list[2]
+
     #img2 = cv2.imread('nofresa.jpg')
     # Initiate STAR detector
 
 
     color = ('b','g','r')
+
+    #Printing-----
 
     plt.subplot(2,2,3)
     for i, c in enumerate(color):
@@ -48,8 +45,6 @@ def main():
         plt.plot(hist, color = c)
         plt.xlim([0,256])
 
-    #Printing-----
-
     plt.subplot(2,2,1)
     plt.imshow(img)
 
@@ -58,22 +53,24 @@ def main():
 
 
     plt.show()
-    #run(img, img2)
 
+    #one or multiple runs-------------
+    #run(img, img2)
     multiRun(image_list)
 
 def run(img, img2):
+    #create orb
     orb = cv2.ORB_create(nfeatures=2000)
 
-    # find the keypoints with ORB
+    # find keypoints ORB
     kp = orb.detect(img,None)
     kp2 = orb.detect(img2,None)
 
-    # compute the descriptors with ORB
+    # compute descriptors ORB
     kp, des = orb.compute(img, kp)
     kp2, des2 = orb.compute(img2, kp2)
 
-    # crea BFMatcher object
+    # create BFMatcher object
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
     # Match descriptors.
@@ -81,23 +78,20 @@ def run(img, img2):
 
     matches = sorted(matches, key = lambda x:x.distance)
 
-    # Dibuja las primeras 30 coincidencias.
+    # show the first 30 matches
     img3 = cv2.drawMatches(img,kp,img2,kp2,matches[:30],None, flags=2)
     suma = 0
-    for match in matches:
-        print match.distance
-        suma = suma + match.distance
 
-    media = suma / len(matches)
-    print (media)
+    #print leng of descriptors and matches vectors
     print (len(des))
     print (len(des2))
     print (len(matches))
 
+    #Print images next to
     plt.imshow(img3),plt.show()
 
 def multiRun(list):
-
+    #create orb
     orb = cv2.ORB_create(nfeatures=2000)
 
     first = list[0]
@@ -112,7 +106,7 @@ def multiRun(list):
         kp, des = orb.compute(first, kp)
         kp2, des2 = orb.compute(image, kp2)
 
-        # crea BFMatcher object
+        # create BFMatcher object
         bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
         # Match descriptors.
@@ -120,20 +114,16 @@ def multiRun(list):
 
         matches = sorted(matches, key = lambda x:x.distance)
 
-    # Dibuja las primeras 30 coincidencias.
+        # show the first 30 matches
         img3 = cv2.drawMatches(first,kp,image,kp2,matches[:30],None, flags=2)
         suma = 0
-        for match in matches:
-            print match.distance
-            suma = suma + match.distance
 
-        media = suma / len(matches)
-        print (media)
+        #print leng of descriptors and matches vectors
         print ("des1 =" + str(len(des)))
         print ("des2 =" + str(len(des2)))
         print ("matches =" + str(len(matches)))
-        print ("media =" + str(media))
 
+        #Print images next to
         plt.figure(figsize=(15,10))
         plt.imshow(img3)
         plt.title('Matches = ' + str(len(matches)))
