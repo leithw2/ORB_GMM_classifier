@@ -38,7 +38,7 @@ class mostrarImagen(QDialog):
         self.setWindowTitle("RECONOCIMIENTO OBJETO")
         self.setWindowIcon(QIcon("icono.png"))
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
-        self.setFixedSize(1000, 800)
+        self.setFixedSize(1000, 600)
 
         self.initUI()
 
@@ -47,7 +47,7 @@ class mostrarImagen(QDialog):
       # ==================== WIDGET QLABEL OF IMAGE =======================
 
         self.labelImagen = QLabelClickable(self)
-        self.labelImagen.setGeometry(250, 15, 700, 500)
+        self.labelImagen.setGeometry(250, 15, 700, 400)
         self.labelImagen.setToolTip("Imagen")
         self.labelImagen.setCursor(Qt.PointingHandCursor)
         self.labelImagen.setStyleSheet("QLabel {background-color: white; border: 1px solid "
@@ -56,7 +56,7 @@ class mostrarImagen(QDialog):
 
       #===================WIDGET QLABEL OF FRUIT NAMES====================
         self.labelFruit1 = QLabelClickable(self)
-        self.labelFruit1.setGeometry(400, 600, 200, 35)
+        self.labelFruit1.setGeometry(400, 470, 200, 35)
         self.labelFruit1.setToolTip("Fruitname")
         self.labelFruit1.setCursor(Qt.PointingHandCursor)
         self.labelFruit1.setStyleSheet("QLabel {background-color: white; border: 1px solid "
@@ -65,7 +65,7 @@ class mostrarImagen(QDialog):
 
 
         self.labelFruit2 = QLabelClickable(self)
-        self.labelFruit2.setGeometry(400, 670, 200, 35)
+        self.labelFruit2.setGeometry(400, 520, 200, 35)
         self.labelFruit2.setToolTip("Fruitname")
         self.labelFruit2.setCursor(Qt.PointingHandCursor)
         self.labelFruit2.setStyleSheet("QLabel {background-color: white; border: 1px solid "
@@ -74,7 +74,7 @@ class mostrarImagen(QDialog):
 
       #===================WIDGET QLABEL OF PROBABILITY====================
         self.labelPercent1 = QLabelClickable(self)
-        self.labelPercent1.setGeometry(650, 600, 100, 35)
+        self.labelPercent1.setGeometry(650, 470, 100, 35)
         self.labelPercent1.setToolTip("Prob")
         self.labelPercent1.setCursor(Qt.PointingHandCursor)
         self.labelPercent1.setStyleSheet("QLabel {background-color: white; border: 1px solid "
@@ -82,7 +82,7 @@ class mostrarImagen(QDialog):
         self.labelPercent1.setAlignment(Qt.AlignCenter)
 
         self.labelPercent2 = QLabelClickable(self)
-        self.labelPercent2.setGeometry(650, 670, 100, 35)
+        self.labelPercent2.setGeometry(650, 520, 100, 35)
         self.labelPercent2.setToolTip("Prob")
         self.labelPercent2.setCursor(Qt.PointingHandCursor)
         self.labelPercent2.setStyleSheet("QLabel {background-color: white; border: 1px solid "
@@ -91,7 +91,7 @@ class mostrarImagen(QDialog):
 
       #=============== LABEL OF OBJECT NAMES================
         self.labelName1 = QLabel("Objeto", self)
-        self.labelName1.setGeometry(450, 550, 100, 35)
+        self.labelName1.setGeometry(450, 420, 100, 35)
         self.labelName1.setToolTip("Objeto")
         self.labelName1.setCursor(Qt.PointingHandCursor)
         self.labelName1.setStyleSheet("QLabel {background-color: --; border: 1px solid "
@@ -100,7 +100,7 @@ class mostrarImagen(QDialog):
 
 
         self.labelName2 = QLabel("Probabilidad, %", self)
-        self.labelName2.setGeometry(600, 550, 200, 35)
+        self.labelName2.setGeometry(600, 420, 200, 35)
         self.labelName2.setToolTip("Probabilidad")
         self.labelName2.setCursor(Qt.PointingHandCursor)
         self.labelName2.setStyleSheet("QLabel {background-color: --; border: 1px solid "
@@ -180,13 +180,22 @@ class mostrarImagen(QDialog):
         thing = np.argmax(prob2)
         print(fresa)
 
-        self.labelFruit1.setText('Fresa')
-        string = "" + str(round(prob[fresa],3))
-        self.labelPercent1.setText(string)
+        if fresa == 0:
+            self.labelFruit1.setText('Fresa')
+            string = "" + str(round(prob2[0],3))
+            self.labelPercent1.setText(string)
+            self.labelFruit2.setText('Mora')
+            string = "" + str(round(prob2[1],3))
+            self.labelPercent2.setText(string)
 
-        self.labelFruit2.setText('Mora')
-        string = "" + str(round(prob[thing],3))
-        self.labelPercent2.setText(string)
+        else:
+
+            self.labelFruit1.setText('Fresa')
+            string = "" + str(round(prob2[1],3))
+            self.labelPercent1.setText(string)
+            self.labelFruit2.setText('Mora')
+            string = "" + str(round(prob2[0],3))
+            self.labelPercent2.setText(string)
 
     def getPrediction(self,model, image):
 
