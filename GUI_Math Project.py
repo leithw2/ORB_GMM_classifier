@@ -90,22 +90,22 @@ class mostrarImagen(QDialog):
         self.labelPercent2.setAlignment(Qt.AlignCenter)
 
       #=============== LABEL OF OBJECT NAMES================
-        self.labelPercent1 = QLabel("Objeto", self)
-        self.labelPercent1.setGeometry(450, 550, 100, 35)
-        self.labelPercent1.setToolTip("Objeto")
-        self.labelPercent1.setCursor(Qt.PointingHandCursor)
-        self.labelPercent1.setStyleSheet("QLabel {background-color: --; border: 1px solid "
+        self.labelName1 = QLabel("Objeto", self)
+        self.labelName1.setGeometry(450, 550, 100, 35)
+        self.labelName1.setToolTip("Objeto")
+        self.labelName1.setCursor(Qt.PointingHandCursor)
+        self.labelName1.setStyleSheet("QLabel {background-color: --; border: 1px solid "
                                        "#01DFD7; border-radius: 5px;}")
-        self.labelPercent1.setAlignment(Qt.AlignCenter)
+        self.labelName1.setAlignment(Qt.AlignCenter)
 
 
-        self.labelPercent1 = QLabel("Probabilidad, %", self)
-        self.labelPercent1.setGeometry(600, 550, 200, 35)
-        self.labelPercent1.setToolTip("Probabilidad")
-        self.labelPercent1.setCursor(Qt.PointingHandCursor)
-        self.labelPercent1.setStyleSheet("QLabel {background-color: --; border: 1px solid "
+        self.labelName2 = QLabel("Probabilidad, %", self)
+        self.labelName2.setGeometry(600, 550, 200, 35)
+        self.labelName2.setToolTip("Probabilidad")
+        self.labelName2.setCursor(Qt.PointingHandCursor)
+        self.labelName2.setStyleSheet("QLabel {background-color: --; border: 1px solid "
                                        "#01DFD7; border-radius: 5px;}")
-        self.labelPercent1.setAlignment(Qt.AlignCenter)
+        self.labelName2.setAlignment(Qt.AlignCenter)
       # ================= WIDGETS QPUSHBUTTON ====================
 
         buttonSeleccionar = QPushButton("Seleccionar", self)
