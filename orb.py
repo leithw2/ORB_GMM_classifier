@@ -8,6 +8,7 @@ from numpy.random import normal
 from sklearn.mixture import GaussianMixture
 from sklearn import svm
 from sklearn import datasets
+from matplotlib.colors import LogNorm
 import pickle
 
 

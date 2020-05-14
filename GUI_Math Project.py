@@ -180,22 +180,29 @@ class mostrarImagen(QDialog):
         thing = np.argmax(prob2)
         print(fresa)
 
-        if fresa == 0:
-            self.labelFruit1.setText('Fresa')
-            string = "" + str(round(prob2[0],3))
-            self.labelPercent1.setText(string)
-            self.labelFruit2.setText('Mora')
-            string = "" + str(round(prob2[1],3))
-            self.labelPercent2.setText(string)
+        self.labelFruit1.setText('Fresa')
+        string = "" + str(round(prob[0],3))
+        self.labelPercent1.setText(string)
 
-        else:
+        self.labelFruit2.setText('Mora')
+        string = "" + str(round(prob[1],3))
+        self.labelPercent2.setText(string)
+        # if fresa == 0:
+        #     self.labelFruit1.setText('Fresa')
+        #     string = "" + str(round(prob2[0],3))
+        #     self.labelPercent1.setText(string)
+        #     self.labelFruit2.setText('Mora')
+        #     string = "" + str(round(prob2[1],3))
+        #     self.labelPercent2.setText(string)
 
-            self.labelFruit1.setText('Fresa')
-            string = "" + str(round(prob2[1],3))
-            self.labelPercent1.setText(string)
-            self.labelFruit2.setText('Mora')
-            string = "" + str(round(prob2[0],3))
-            self.labelPercent2.setText(string)
+        # else:
+        #
+        #     self.labelFruit1.setText('Fresa')
+        #     string = "" + str(round(prob2[1],3))
+        #     self.labelPercent1.setText(string)
+        #     self.labelFruit2.setText('Mora')
+        #     string = "" + str(round(prob2[0],3))
+        #     self.labelPercent2.setText(string)
 
     def getPrediction(self,model, image):
 

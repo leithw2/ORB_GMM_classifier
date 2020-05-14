@@ -1,1 +1,1 @@
-# image-recognition
+# ORB_GMM_classifier
